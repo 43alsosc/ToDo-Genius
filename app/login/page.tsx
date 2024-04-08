@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
+import GitAuth from "@/components/GithubAuth";
 
 export default function Login({
   searchParams,
@@ -113,6 +114,7 @@ export default function Login({
             {searchParams.message}
           </p>
         )}
+        <GitAuth />
       </form>
     </div>
   );
