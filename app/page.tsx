@@ -1,5 +1,8 @@
+import { Button } from "@/components/ui/button";
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { Link } from "lucide-react";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -24,7 +27,13 @@ export default async function Index() {
       </nav>
 
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
-        <main className="flex-1 flex flex-col gap-6"></main>
+        <main className="flex-1 flex flex-col gap-6">
+          {isSupabaseConnected && (
+            <Link href="/dashboard" className="">
+              Dashboard
+            </Link>
+          )}
+        </main>
       </div>
     </div>
   );
