@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const code = searchParams.get('code');
   const next = searchParams.get('next') ?? '/dashboard';
 
-  const origin = process.env.NEXT_PUBLIC_APP_ENV === 'production' ? 'https://todogenuis.duckdns.org' : new URL(request.url).origin;
+  const origin = 'https://todogenuis.duckdns.org'
 
   if (code) {
     const cookieStore = cookies();
