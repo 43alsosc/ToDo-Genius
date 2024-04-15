@@ -34,7 +34,6 @@ const CookieBanner: React.FC = () => {
         We use cookies to improve your browsing experience. By using our site,
         you agree to our use of cookies.
       </p>
-      {/* Add more information about your cookies here */}
     </div>
   );
 };
