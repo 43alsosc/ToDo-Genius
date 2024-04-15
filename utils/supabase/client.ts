@@ -1,21 +1,15 @@
-import { createBrowserClient } from "@supabase/ssr";
-import { useMemo } from "react";
+import { useMemo } from 'react';
+import { createBrowserClient } from '@supabase/ssr';
 
 export function getSupabaseBrowserClient() {
   return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 }
 
 function useSupabaseClient() {
-  return useMemo(getSupabaseBrowserClient, [])
+  return useMemo(getSupabaseBrowserClient, []);
 }
-
-export const createClient = () =>
-  createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
 
 export default useSupabaseClient;
