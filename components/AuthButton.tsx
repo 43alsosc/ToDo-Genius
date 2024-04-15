@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { DropdownMenuItem } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -33,5 +35,22 @@ export default async function AuthButton() {
     >
       Login
     </Link>
+  );
+}
+
+export function SignOutButton() {
+  const signOut = async () => {
+    "use server";
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    return redirect("/login");
+  };
+
+  return (
+    <form action={signOut}>
+      <DropdownMenuItem>
+        <button className="w-full h-full p-0 m-0 text-left">Sign Out</button>
+      </DropdownMenuItem>
+    </form>
   );
 }
