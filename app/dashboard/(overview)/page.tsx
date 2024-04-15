@@ -16,6 +16,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/data-table/data-table";
 import { ToDo, columns } from "@/components/data-table/columns";
 import { createClient } from "@/utils/supabase/server";
+import { GetServerSideProps } from "next";
+import { redirect } from "next/navigation";
 
 async function getData(): Promise<ToDo[]> {
   const supabase = createClient();
@@ -31,6 +33,15 @@ async function getData(): Promise<ToDo[]> {
 }
 
 export default async function page() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
   const data = await getData();
   return (
     <div className="w-4/5">
