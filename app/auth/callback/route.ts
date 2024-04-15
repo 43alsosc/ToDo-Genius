@@ -6,9 +6,8 @@ import { cookies } from "next/headers";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
-  const next = searchParams.get('next') ?? '/dashboard';
 
-  const origin = 'http://todogenuis.duckdns.org'
+  const origin = process.env.ORIGIN || 'http://todogenuis.duckdns.org';
 
   if (code) {
     const cookieStore = cookies();
