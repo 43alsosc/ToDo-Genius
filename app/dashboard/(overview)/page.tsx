@@ -18,6 +18,7 @@ import { ToDo, columns } from "@/components/data-table/columns";
 import { createClient } from "@/utils/supabase/server";
 import { GetServerSideProps } from "next";
 import { redirect } from "next/navigation";
+import CookieBanner from "@/components/CookieBanner";
 
 async function getData(): Promise<ToDo[]> {
   const supabase = createClient();
@@ -135,6 +136,7 @@ export default async function page() {
           </Tabs>
         </main>
       </div>
+      <CookieBanner />
     </div>
   );
 }
