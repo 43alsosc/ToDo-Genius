@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
 
-  const origin = process.env.ORIGIN || 'http://todogenuis.duckdns.org';
+  const origin = process.env.ORIGIN || 'localhost:3000';
 
   if (code) {
     const cookieStore = cookies();
