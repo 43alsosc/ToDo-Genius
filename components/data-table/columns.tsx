@@ -1,6 +1,11 @@
 "use client";
 
+import { createClient } from "@/utils/supabase/client";
 import { ColumnDef } from "@tanstack/react-table";
+import { Router } from "lucide-react";
+import { redirect } from "next/navigation";
+import router from "next/router";
+import { useState } from "react";
 
 export type ToDo = {
   id: string;
@@ -9,15 +14,39 @@ export type ToDo = {
   inserted_at: Date;
 };
 
+const supabase = createClient();
+
 export const columns: ColumnDef<ToDo>[] = [
   {
     accessorKey: "is_complete",
     header: () => <div className="text-center">Completed</div>,
     cell: ({ row }: { row: any }) => {
       const is_completed = row.getValue("is_complete");
+      const id = row.original.id;
+
+      const updateTask = async (id: number, is_complete: boolean) => {
+        await supabase.from("todos").update({ is_complete }).eq("id", id);
+        console.log(is_complete);
+        const { data, error } = await supabase
+          .from("todos")
+          .select("")
+          .eq("id", id);
+
+        if (error) {
+          console.error("Error fetching updated data:", error);
+        } else {
+          console.log("Updated data:", data);
+          window.location.reload();
+        }
+      };
+
       return (
         <div className="text-center font-medium">
-          <input type="checkbox" checked={is_completed} disabled />
+          <input
+            type="checkbox"
+            checked={is_completed}
+            onChange={() => updateTask(id, !is_completed)} // call updateTask when checkbox is clicked
+          />
         </div>
       );
     },
