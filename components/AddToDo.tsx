@@ -55,6 +55,7 @@ export default function AddProduct() {
         console.error("Error inserting todo:", error);
       } else {
         console.log("Inserted todo:", data);
+        window.location.reload();
       }
 
       console.log("Form submitted");
@@ -71,7 +72,7 @@ export default function AddProduct() {
         onClick={openModal}
       >
         <PlusCircle className="h-3.5 w-3.5" />
-        <span>Add Product</span>
+        <span>Add ToDo</span>
       </Button>
       <Modal
         isOpen={isModalOpen}
@@ -100,14 +101,14 @@ export default function AddProduct() {
           <div className="flex">
             <Input
               type="text"
-              placeholder="Product Name"
+              placeholder="Add ToDo (min 4 characters)"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
             <Button type="submit">
               <PlusCircle className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Add Product
+                Add ToDo
               </span>
             </Button>
           </div>
