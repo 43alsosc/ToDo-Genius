@@ -9,6 +9,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import Profile from "@/components/Profile";
+import AddProduct from "@/components/AddProduct";
 
 async function getData(): Promise<ToDo[]> {
   const supabase = createClient();
@@ -35,7 +36,7 @@ export default async function page() {
   }
   const data = await getData();
   return (
-    <div className="w-4/5">
+    <div className="w-4/5" id="rootElement">
       <SideNav />
       <div>
         <div className="">
@@ -69,12 +70,7 @@ export default async function page() {
                     Export
                   </span>
                 </Button>
-                <Button size="sm" className="h-8 gap-1">
-                  <PlusCircle className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Add Product
-                  </span>
-                </Button>
+                <AddProduct />
               </div>
             </div>
             <div className="pt-8">
