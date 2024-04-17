@@ -36,7 +36,6 @@ export default function AddProduct() {
     const stringDate = formattedDate.toString();
 
     console.log("task", task);
-    console.log(user.id);
     console.log(formattedDate);
 
     if (user) {
