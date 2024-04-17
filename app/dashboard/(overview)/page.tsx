@@ -9,7 +9,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import Profile from "@/components/Profile";
-import AddProduct from "@/components/AddProduct";
+import AddProduct from "@/components/AddToDo";
 
 async function getData(): Promise<ToDo[]> {
   const supabase = createClient();
