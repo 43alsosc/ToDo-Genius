@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { Router } from "lucide-react";
 import { redirect } from "next/navigation";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export type ToDo = {
@@ -36,7 +36,8 @@ export const columns: ColumnDef<ToDo>[] = [
           console.error("Error fetching updated data:", error);
         } else {
           console.log("Updated data:", data);
-          window.location.reload();
+          const router = useRouter();
+          router.reload();
         }
       };
 
