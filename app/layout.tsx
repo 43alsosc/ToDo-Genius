@@ -29,7 +29,6 @@ export default function RootLayout({
         >
           <main className="min-h-screen flex flex-col items-center">
             <SideNav />
-
             {children}
           </main>
         </ThemeProvider>
