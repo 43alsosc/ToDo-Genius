@@ -1,28 +1,15 @@
 import Link from "next/link";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Checkbox } from "@mui/material";
-import { CollapsedSideNav, SideNav } from "@/components/side-nav";
+import { CollapsedSideNav } from "@/components/side-nav";
 import Profile from "@/components/Profile";
 import ModeToggle from "@/components/DarkmodeButton";
 
@@ -63,8 +50,8 @@ export default function Dashboard() {
           <div className="grid gap-6">
             <Card x-chunk="dashboard-04-chunk-1">
               <CardHeader>
-                <CardTitle>Dark mode</CardTitle>
-                <CardDescription>Toggle dark mode</CardDescription>
+                <CardTitle>Theme</CardTitle>
+                <CardDescription>Toggle theme </CardDescription>
               </CardHeader>
               <CardContent>
                 <form>
