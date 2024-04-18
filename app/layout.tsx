@@ -28,7 +28,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className="min-h-screen flex flex-col items-center">
-            <SideNav />
             {children}
           </main>
         </ThemeProvider>
