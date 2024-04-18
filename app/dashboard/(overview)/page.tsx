@@ -42,7 +42,6 @@ export default async function page() {
     <div className="w-4/5" id="root">
       <div>
         <div className="">
-          <SideNav />
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b justify-between bg-background px-4 py-3 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <CollapsedSideNav />
             {/* Søk */}
@@ -77,9 +76,7 @@ export default async function page() {
               </div>
             </div>
             <div className="pt-8">
-              <Suspense fallback={<DataTableSkeleton />}>
-                <DataTable columns={columns} data={data} />
-              </Suspense>
+              <DataTable columns={columns} data={data} />
             </div>
           </Tabs>
         </main>
