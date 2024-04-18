@@ -6,11 +6,11 @@ import { PlusCircle } from "lucide-react";
 import { Input } from "./ui/input";
 import { createClient } from "@/utils/supabase/client";
 
-// This line is important for accessibility reasons. Replace '#root' with the id of your app's root element.
-Modal.setAppElement("#rootElement");
-
 export default function AddProduct() {
   const supabase = createClient();
+
+  // This line is important for accessibility reasons. Replace '#root' with the id of your app's root element.
+  Modal.setAppElement("#root");
 
   const [task, setTask] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);

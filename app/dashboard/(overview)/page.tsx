@@ -10,6 +10,9 @@ import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import Profile from "@/components/Profile";
 import AddProduct from "@/components/AddToDo";
+import Modal from "react-modal";
+import { Suspense } from "react";
+import DataTableSkeleton from "@/components/data-table/skeleton";
 
 async function getData(): Promise<ToDo[]> {
   const supabase = createClient();
@@ -36,10 +39,10 @@ export default async function page() {
   }
   const data = await getData();
   return (
-    <div className="w-4/5" id="rootElement">
-      <SideNav />
+    <div className="w-4/5" id="root">
       <div>
         <div className="">
+          <SideNav />
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b justify-between bg-background px-4 py-3 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <CollapsedSideNav />
             {/* Søk */}
@@ -74,7 +77,9 @@ export default async function page() {
               </div>
             </div>
             <div className="pt-8">
-              <DataTable columns={columns} data={data} />
+              <Suspense fallback={<DataTableSkeleton />}>
+                <DataTable columns={columns} data={data} />
+              </Suspense>
             </div>
           </Tabs>
         </main>
