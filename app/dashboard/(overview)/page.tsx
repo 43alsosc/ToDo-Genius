@@ -1,33 +1,20 @@
-import { CollapsedSideNav, SideNav } from "@/components/side-nav";
+import { CollapsedSideNav } from "@/components/side-nav";
 import { Button } from "@/components/ui/button";
-import { Search, File, PlusCircle } from "lucide-react";
+import { Search, File } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/data-table/data-table";
-import { ToDo, columns } from "@/components/data-table/columns";
+import { columns } from "@/components/data-table/columns";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import Profile from "@/components/Profile";
 import AddProduct from "@/components/AddToDo";
-import Modal from "react-modal";
 import { Suspense } from "react";
 import DataTableSkeleton from "@/components/data-table/skeleton";
+import getData from "@/api/fetch/getDataTableData";
 
-async function getData(): Promise<ToDo[]> {
-  const supabase = createClient();
-  supabase.auth.getUser();
-  const { data, error } = await supabase.from("todos").select("*");
-  if (error) {
-    console.error("Error fetching todos", error);
-    throw error;
-  } else if (!data) {
-    console.error("No data found");
-  }
-  return data;
-}
-
-export default async function page() {
+export default async function page({}) {
   const supabase = createClient();
 
   const {
@@ -37,7 +24,9 @@ export default async function page() {
   if (!user) {
     return redirect("/login");
   }
+
   const data = await getData();
+
   return (
     <div className="w-4/5" id="root">
       <div>
@@ -76,7 +65,9 @@ export default async function page() {
               </div>
             </div>
             <div className="pt-8">
-              <DataTable columns={columns} data={data} />
+              <Suspense fallback={<DataTableSkeleton />}>
+                <DataTable columns={columns} data={data} />
+              </Suspense>
             </div>
           </Tabs>
         </main>
