@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Button } from "./ui/button";
 import { PlusCircle } from "lucide-react";
@@ -7,10 +7,11 @@ import { Input } from "./ui/input";
 import { createClient } from "@/utils/supabase/client";
 
 export default function AddProduct() {
-  const supabase = createClient();
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
 
-  // This line is important for accessibility reasons. Replace '#root' with the id of your app's root element.
-  Modal.setAppElement("#root");
+  const supabase = createClient();
 
   const [task, setTask] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,13 +24,17 @@ export default function AddProduct() {
     setIsModalOpen(false);
   };
 
+  // This line is important for accessibility reasons. Replace '#root' with the id of your app's root element.
+
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const supabase = createClient();
+
     const {
       data: { user },
     } = await supabase.auth.getUser();
+
     const now = new Date();
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const formattedDate = `${now.getFullYear()}-${month}-${now.getDate()}`;
@@ -55,9 +60,7 @@ export default function AddProduct() {
         console.error("Error inserting todo:", error);
       } else {
         console.log("Inserted todo:", data);
-        window.location.reload();
       }
-
       console.log("Form submitted");
     }
     closeModal();
