@@ -2,6 +2,8 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "../ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 export type ToDo = {
   id: string;
@@ -14,8 +16,40 @@ const supabase = createClient();
 
 export const columns: ColumnDef<ToDo>[] = [
   {
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="justify-center w-full"
+        >
+          <div className="text-center">Id</div>
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }: { row: any }) => {
+      const id = row.getValue("id");
+      const formatted = typeof id === "number" ? id.valueOf() : id;
+
+      return <div className="text-center font-medium">{formatted}</div>;
+    },
+  },
+  {
     accessorKey: "is_complete",
-    header: () => <div className="text-center">Completed</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="justify-center w-full"
+        >
+          <div className="text-center">Completed</div>
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }: { row: any }) => {
       const is_completed = row.getValue("is_complete");
       const id = row.original.id;
@@ -48,7 +82,18 @@ export const columns: ColumnDef<ToDo>[] = [
   },
   {
     accessorKey: "task",
-    header: () => <div className="text-center">Task</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="justify-center w-full"
+        >
+          <div className="text-center">Task</div>
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }: { row: any }) => {
       const task = row.getValue("task");
       const formatted = typeof task === "string" ? task.toUpperCase() : task;
@@ -58,7 +103,18 @@ export const columns: ColumnDef<ToDo>[] = [
   },
   {
     accessorKey: "inserted_at",
-    header: () => <div className="text-center">Created</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="justify-center w-full"
+        >
+          <div className="text-center">Created</div>
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }: { row: any }) => {
       const inserted_at = row.getValue("inserted_at");
       const formatted =
