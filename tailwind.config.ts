@@ -1,3 +1,4 @@
+import { nextui } from "@nextui-org/react"
 import type { Config } from "tailwindcss"
 
 const config = {
@@ -7,6 +8,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -52,12 +54,6 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        google: {
-          DEFAULT: "#4285F4"
-        },
-        github: {
-          DEFAULT: "A2AAAD"
-        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,7 +76,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), nextui()],
 } satisfies Config
 
 export default config
