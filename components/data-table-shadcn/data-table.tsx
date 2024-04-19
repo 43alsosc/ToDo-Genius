@@ -26,7 +26,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Search, File } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { Tabs } from "../ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -50,7 +50,12 @@ export function DataTable<TData, TValue>({
   );
 
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>({
+      id: false,
+      task: true,
+      is_complete: true,
+      inserted_at: true,
+    });
 
   const table = useReactTable({
     data,
@@ -68,7 +73,6 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
-
   return (
     <div>
       <Tabs defaultValue="all">
