@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Search, File } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DataTable } from "@/components/data-table/data-table";
-import { columns } from "@/components/data-table/columns";
+import { DataTable } from "@/components/data-table-shadcn/data-table";
+import { columns } from "@/components/data-table-shadcn/columns";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import Profile from "@/components/Profile";
 import AddProduct from "@/components/AddToDo";
 import { Suspense } from "react";
-import DataTableSkeleton from "@/components/data-table/skeleton";
+import DataTableSkeleton from "@/components/data-table-shadcn/skeleton";
 import getData from "@/api/fetch/getDataTableData";
 
 export default async function page({}) {
@@ -67,6 +67,7 @@ export default async function page({}) {
             <div className="pt-8">
               <Suspense fallback={<DataTableSkeleton />}>
                 <DataTable columns={columns} data={data} />
+                {/* <ToDoTable /> */}
               </Suspense>
             </div>
           </Tabs>

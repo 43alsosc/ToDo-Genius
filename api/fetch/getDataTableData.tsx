@@ -1,4 +1,4 @@
-import { ToDo } from "@/components/data-table/columns";
+import { ToDo } from "@/components/data-table-shadcn/columns";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function getData(): Promise<ToDo[]> {
