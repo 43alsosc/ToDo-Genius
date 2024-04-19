@@ -8,6 +8,7 @@ import {
 } from "./ui/tooltip";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
+import Profile from "./Profile";
 
 export function SideNav() {
   return (
@@ -46,6 +47,12 @@ export function SideNav() {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Settings</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <Profile />
+            <TooltipContent side="right">Profile</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>

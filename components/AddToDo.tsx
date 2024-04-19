@@ -71,7 +71,7 @@ export default function AddProduct() {
       <Button
         size="sm"
         variant="outline"
-        className="h-8 gap-1"
+        className="h-10 gap-1"
         onClick={openModal}
       >
         <PlusCircle className="h-3.5 w-3.5" />
