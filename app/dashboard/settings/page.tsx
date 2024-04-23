@@ -14,7 +14,6 @@ import Profile from "@/components/Profile";
 import ModeToggle from "@/components/DarkmodeButton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { DeleteUser, DeleteUserButton } from "@/components/AuthButton";
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -69,15 +68,6 @@ export default async function Dashboard() {
                 <form>
                   <ModeToggle />
                 </form>
-              </CardContent>
-            </Card>
-            <Card x-chunk="dashboard-04-chunk-1">
-              <CardHeader>
-                <CardTitle>Delete Account</CardTitle>
-                <CardDescription>Delete your account</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <DeleteUser />
               </CardContent>
             </Card>
           </div>
