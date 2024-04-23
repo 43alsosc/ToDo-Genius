@@ -31,19 +31,6 @@ export default async function Dashboard() {
         <div className="">
           <CollapsedSideNav />
         </div>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-8 sm:w-[300px] md:w-[300px] lg:w-[300px]"
-              />
-            </div>
-          </form>
-          <Profile />
-        </div>
       </header>
       <main className="flex md:ml-14 min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
         <div className="mx-auto grid w-full max-w-6xl gap-2">
