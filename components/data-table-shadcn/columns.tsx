@@ -39,16 +39,7 @@ export const columns: ColumnDef<ToDo>[] = [
   {
     accessorKey: "is_complete",
     header: ({ column }) => {
-      return (
-        <Button
-          variant={"ghost"}
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="justify-center w-full"
-        >
-          <div className="text-center">Completed</div>
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+      return <div className="text-center">Completed</div>;
     },
     cell: ({ row }: { row: any }) => {
       const is_completed = row.getValue("is_complete");
