@@ -34,6 +34,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import AddProduct from "../AddToDo";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -48,7 +50,6 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
       id: false,
@@ -56,6 +57,21 @@ export function DataTable<TData, TValue>({
       is_complete: true,
       inserted_at: true,
     });
+
+  const supabase = createClient();
+  const router = useRouter();
+
+  supabase
+    .channel("data_table_data")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "todos" },
+      (payload) => {
+        console.log("Change received!", payload);
+        router.refresh();
+      }
+    )
+    .subscribe();
 
   const table = useReactTable({
     data,
@@ -73,6 +89,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
+
   return (
     <div>
       <Tabs defaultValue="all">
