@@ -4,9 +4,18 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import useSupabaseClient from "@/utils/supabase/client";
-import { Button } from "@primer/react";
+import { Button } from "@/components/ui/button";
 import LogInWithGitHub from "@/components/LogInWithGitHub";
 import LogInWithGoogle from "@/components/LogInWithGoogle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { InfoIcon } from "lucide-react";
 
 export default function LoginForm({
   searchParams,
@@ -100,12 +109,37 @@ export default function LoginForm({
         <label className="text-md" htmlFor="password">
           Password
         </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-        />
+        <div className="rounded-md border bg-inherit broder-none mb-6 flex">
+          <input
+            className="w-full h-full px-4 py-2 bg-transparent border-none"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="overflow-hidden rounded-full bg-transparent border-none hover:bg-transparent"
+              >
+                <InfoIcon className="border-none" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center">
+              <DropdownMenuLabel>Requirements</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <div className="">
+                <p className="text-xs">
+                  <p>Must contain at least one number and one uppercase</p>
+                  <p>and lowercase letter, and at least 8 or more characters</p>
+                </p>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <SubmitButton
           formAction={signIn}
           className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"

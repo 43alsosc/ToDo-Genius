@@ -10,7 +10,7 @@ export default async function getData(): Promise<ToDo[]> {
     .select("*")
     .match({ is_complete: false });
   if (error) {
-    console.error("Error fetching todos", error);
+    console.error("Error fetching todos");
     throw error;
   } else if (!data) {
     console.error("No data found");

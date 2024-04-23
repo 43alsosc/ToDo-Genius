@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
       "postgres_changes",
       { event: "*", schema: "public", table: "todos" },
       (payload) => {
-        console.log("Change received!", payload);
+        console.log("Change received!");
         router.refresh();
       }
     )
@@ -103,7 +103,6 @@ export function DataTable<TData, TValue>({
               }
               onChange={(event) => {
                 table.getColumn("task")?.setFilterValue(event.target.value);
-                console.log("task");
               }}
               className="max-w-sm pl-8"
             />

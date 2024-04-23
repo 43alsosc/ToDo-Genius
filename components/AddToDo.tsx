@@ -57,9 +57,9 @@ export default function AddProduct() {
         .select();
 
       if (error) {
-        console.error("Error inserting todo:", error);
+        console.error("Error inserting todo:");
       } else {
-        console.log("Inserted todo:", data);
+        console.log("Inserted todo");
       }
       console.log("Form submitted");
     }

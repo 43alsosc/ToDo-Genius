@@ -54,9 +54,9 @@ export const columns: ColumnDef<ToDo>[] = [
           .eq("id", id);
 
         if (error) {
-          console.error("Error fetching updated data:", error);
+          console.error("Error fetching updated data:");
         } else {
-          console.log("Updated data:", data);
+          console.log("Updated data:");
         }
       };
 
