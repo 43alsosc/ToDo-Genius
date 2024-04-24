@@ -28,7 +28,7 @@ export default function AddProduct() {
     const formattedDate = `${now.getFullYear()}-${month}-${now.getDate()}`;
     const stringDate = formattedDate.toString();
 
-    console.log("task", task);
+    console.log("task: ", task);
     console.log(formattedDate);
 
     if (user) {
