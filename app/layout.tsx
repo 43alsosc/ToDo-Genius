@@ -1,7 +1,5 @@
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SideNav } from "@/components/side-nav";
 import { Providers } from "./providers";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -10,9 +8,15 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "ToDo Genius",
+  description: "The fastest way to get things done.",
 };
+
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -20,14 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={(GeistSans.className, "dark")}>
-      <body className="bg-background text-foreground">
+    <html lang="en" className={(inter.className, "dark w-full")}>
+      <body className="w-full bg-background text-foreground">
         <Providers>
-          <div>
-            <main className="min-h-screen flex flex-col items-center">
-              {children}
-            </main>
-          </div>
+          <main className="min-w-full min-h-screen flex flex-col items-center">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
