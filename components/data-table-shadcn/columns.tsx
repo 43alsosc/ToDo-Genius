@@ -3,7 +3,8 @@
 import { createClient } from "@/utils/supabase/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Check, Pen, Trash } from "lucide-react";
+import { Checkbox } from "@nextui-org/react";
 
 export type ToDo = {
   id: string;
@@ -56,17 +57,24 @@ export const columns: ColumnDef<ToDo>[] = [
         if (error) {
           console.error("Error fetching updated data:");
         } else {
-          console.log("Updated data:");
+          console.log("Updated data: ", data);
         }
+      };
+
+      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        updateTask(id, !is_completed);
       };
 
       return (
         <div className="text-center font-medium">
-          <input
-            type="checkbox"
-            checked={is_completed}
-            onChange={() => updateTask(id, !is_completed)} // call updateTask when checkbox is clicked
-          />
+          <Button
+            variant="outline"
+            className="text-green-500 bg-transparent"
+            onClick={handleClick}
+          >
+            <Check className="h-4 w-4" />
+          </Button>
         </div>
       );
     },
@@ -111,6 +119,52 @@ export const columns: ColumnDef<ToDo>[] = [
       const formatted =
         typeof inserted_at === "string" ? inserted_at.slice() : inserted_at;
       return <div className="text-center font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "actions",
+    header: ({ column }) => {
+      return <div className="text-center">Actions</div>;
+    },
+    cell: ({ row }: { row: any }) => {
+      const id = row.getValue("id");
+
+      const deleteTask = async (id: number) => {
+        await supabase.from("todos").delete().eq("id", id);
+        console.log("Deleted task");
+      };
+
+      const editTask = async (id: number) => {
+        const { data, error } = await supabase
+          .from("todos")
+          .update({ task: "updatedTask" })
+          .eq("id", id);
+
+        if (error) {
+          console.error("Error fetching data to edit:");
+        } else {
+          console.log("Edit data:");
+        }
+      };
+
+      return (
+        <div className="text-center font-medium">
+          <Button
+            variant="outline"
+            onClick={() => deleteTask(id)}
+            className="text-red-500"
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => editTask(id)}
+            className="text-green-500"
+          >
+            <Pen className="h-4 w-4" />
+          </Button>
+        </div>
+      );
     },
   },
 ];

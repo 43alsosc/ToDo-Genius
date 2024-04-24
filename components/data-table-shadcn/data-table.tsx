@@ -56,6 +56,7 @@ export function DataTable<TData, TValue>({
       task: true,
       is_complete: true,
       inserted_at: true,
+      actions: true,
     });
 
   const supabase = createClient();
