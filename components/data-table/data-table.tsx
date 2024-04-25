@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Search, File } from "lucide-react";
+import { Search } from "lucide-react";
 import { Tabs } from "../ui/tabs";
 import {
   DropdownMenu,
@@ -36,6 +36,7 @@ import {
 import AddProduct from "../AddToDo";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import ExportButton from "../ExportButton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -46,9 +47,9 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]); // State for sorting
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [] // State for column filters
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
@@ -57,10 +58,10 @@ export function DataTable<TData, TValue>({
       mark_done: true,
       inserted_at: true,
       actions: true,
-    });
+    }); // State for column visibility
 
-  const supabase = createClient();
-  const router = useRouter();
+  const supabase = createClient(); // Create a Supabase client
+  const router = useRouter(); // Get the router object from Next.js
 
   supabase
     .channel("data_table_data")
@@ -68,8 +69,8 @@ export function DataTable<TData, TValue>({
       "postgres_changes",
       { event: "*", schema: "public", table: "todos" },
       (payload) => {
-        console.log("Change received!");
-        router.refresh();
+        console.log("Change received!"); // Log a message when a change is received
+        router.refresh(); // Refresh the page when a change is received
       }
     )
     .subscribe();
@@ -95,6 +96,7 @@ export function DataTable<TData, TValue>({
     <div>
       <Tabs defaultValue="all">
         <div className="flex justify-between">
+          {/* ToDo search */}
           <div className="relative flex items-center py-4 w-1/2">
             <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
             <Input
@@ -109,6 +111,7 @@ export function DataTable<TData, TValue>({
             />
           </div>
           <div className="py-4 flex gap-3">
+            {/* Dropdown for column filters */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="ml-auto">
@@ -135,12 +138,9 @@ export function DataTable<TData, TValue>({
                   })}
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button size="sm" variant="outline" className="h-10 gap-1">
-              <File className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Export
-              </span>
-            </Button>
+            {/* Export button */}
+            <ExportButton />
+            {/* Input form to add Todo */}
             <AddProduct />
           </div>
         </div>
