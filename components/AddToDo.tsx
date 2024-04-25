@@ -71,7 +71,7 @@ export default function AddProduct() {
             onClick={handleFormSubmit}
           >
             <span>
-              <PlusCircle className="h-3.5 w-3.5 text-white" />
+              <PlusCircle className="h-3.5 w-3.5 dark:text-white light:text-black" />
             </span>
           </Button>
         </div>
