@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import useSupabaseClient from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
-import LogInWithGitHub from "@/components/LogInWithGitHub";
-import LogInWithGoogle from "@/components/LogInWithGoogle";
+import LogInWithGitHub from "@/components/Auth/LogInWithGitHub";
+import LogInWithGoogle from "@/components/Auth/LogInWithGoogle";
 import {
   DropdownMenu,
   DropdownMenuContent,

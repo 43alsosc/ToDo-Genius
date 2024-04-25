@@ -1,6 +1,6 @@
 "use client";
 import useSupabaseClient from "@/utils/supabase/client";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Github, GithubIcon } from "lucide-react";
 
 export default function LogInWithGitHub() {
