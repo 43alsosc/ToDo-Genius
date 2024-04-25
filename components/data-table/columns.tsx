@@ -45,7 +45,7 @@ export const columns: ColumnDef<ToDo>[] = [
       return <div className="text-center">Mark Done</div>;
     },
     cell: ({ row }: { row: any }) => {
-      const is_completed = row.getValue("is_complete");
+      const is_completed = row.getValue("mark_done");
       const id = row.original.id;
 
       const updateTask = async (id: number, is_complete: boolean) => {
