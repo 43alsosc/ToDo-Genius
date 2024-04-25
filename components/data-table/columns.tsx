@@ -40,7 +40,7 @@ export const columns: ColumnDef<ToDo>[] = [
     },
   },
   {
-    accessorKey: "mark done",
+    accessorKey: "mark_done",
     header: ({ column }) => {
       return <div className="text-center">Mark Done</div>;
     },

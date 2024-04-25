@@ -54,7 +54,7 @@ export function DataTable<TData, TValue>({
     React.useState<VisibilityState>({
       id: false,
       task: true,
-      is_complete: true,
+      mark_done: true,
       inserted_at: true,
       actions: true,
     });
