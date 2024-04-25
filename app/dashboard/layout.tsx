@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center">
+    <div className="bg-muted/40 min-h-screen w-screen flex flex-col items-center">
       <SideNav />
       {children}
     </div>

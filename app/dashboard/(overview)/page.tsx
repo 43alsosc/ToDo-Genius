@@ -23,12 +23,12 @@ export default async function page({}) {
   const data = await getData();
 
   return (
-    <div className="w-4/5" id="root">
+    <div className="w-4/5 " id="root">
       <div>
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b justify-between bg-background px-4 py-3 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           <CollapsedSideNav />
         </header>
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 ">
           <div className="pt-8">
             <Suspense fallback={<DataTableSkeleton />}>
               <DataTable columns={columns} data={data} />
