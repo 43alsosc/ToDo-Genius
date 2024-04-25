@@ -4,7 +4,9 @@ import { createClient } from "@/utils/supabase/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import { ArrowUpDown, Check, Pen, Trash } from "lucide-react";
-import { Checkbox } from "@nextui-org/react";
+import { useState } from "react";
+import { Input } from "../ui/input";
+import { Close } from "@mui/icons-material";
 
 export type ToDo = {
   id: string;
@@ -38,9 +40,9 @@ export const columns: ColumnDef<ToDo>[] = [
     },
   },
   {
-    accessorKey: "is_complete",
+    accessorKey: "mark done",
     header: ({ column }) => {
-      return <div className="text-center">Completed</div>;
+      return <div className="text-center">Mark Done</div>;
     },
     cell: ({ row }: { row: any }) => {
       const is_completed = row.getValue("is_complete");
@@ -127,6 +129,9 @@ export const columns: ColumnDef<ToDo>[] = [
       return <div className="text-center">Actions</div>;
     },
     cell: ({ row }: { row: any }) => {
+      const [isEditing, setIsEditing] = useState(false);
+      const [updatedTask, setUpdatedTask] = useState("");
+
       const id = row.getValue("id");
 
       const deleteTask = async (id: number) => {
@@ -134,16 +139,17 @@ export const columns: ColumnDef<ToDo>[] = [
         console.log("Deleted task");
       };
 
-      const editTask = async (id: number) => {
+      const editTask = async (id: number, task: string) => {
         const { data, error } = await supabase
           .from("todos")
-          .update({ task: "updatedTask" })
+          .update({ task })
           .eq("id", id);
 
         if (error) {
           console.error("Error fetching data to edit:");
         } else {
           console.log("Edit data:");
+          setIsEditing(false); // Hide the input field after successful update
         }
       };
 
@@ -156,13 +162,47 @@ export const columns: ColumnDef<ToDo>[] = [
           >
             <Trash className="h-4 w-4" />
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => editTask(id)}
-            className="text-green-500"
-          >
-            <Pen className="h-4 w-4" />
-          </Button>
+          {isEditing ? (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                editTask(id, updatedTask);
+                setUpdatedTask("");
+              }}
+            >
+              <div className="flex">
+                <Input
+                  type="text"
+                  placeholder="min 4 characters"
+                  value={updatedTask}
+                  onChange={(e) => setUpdatedTask(e.target.value)}
+                  autoFocus
+                />
+                <Button
+                  variant="outline"
+                  type="submit"
+                  className="text-green-500"
+                >
+                  <Check className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsEditing(false)}
+                  className="text-red-500"
+                >
+                  <Close className="h-4 w-4" />
+                </Button>
+              </div>
+            </form>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => setIsEditing(true)}
+              className="text-green-500"
+            >
+              <Pen className="h-4 w-4" />
+            </Button>
+          )}
         </div>
       );
     },
