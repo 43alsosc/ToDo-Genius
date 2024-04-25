@@ -1,12 +1,12 @@
 import { CollapsedSideNav } from "@/components/side-nav";
 import { Tabs } from "@/components/ui/tabs";
-import { DataTable } from "@/components/data-table-shadcn/data-table";
-import { columns } from "@/components/data-table-shadcn/columns";
+import { DataTable } from "@/components/data-table/data-table";
+import { columns } from "@/components/data-table/columns";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
 import { Suspense } from "react";
-import DataTableSkeleton from "@/components/data-table-shadcn/skeleton";
+import DataTableSkeleton from "@/components/data-table/skeleton";
 import getData from "@/api/fetch/getDataTableData";
 
 export default async function page({}) {
