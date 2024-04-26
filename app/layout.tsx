@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={(inter.className, "w-full dark")}>
+    <html lang="en" className={(inter.className, "w-full")}>
       <Analytics />
       <body className="w-full bg-background text-foreground">
         <Providers>

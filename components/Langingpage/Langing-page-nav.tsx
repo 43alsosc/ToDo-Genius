@@ -26,7 +26,7 @@ export default function LangingPageNav() {
           className="text-sm font-medium hover:underline underline-offset-4"
           href="#"
         >
-          Contact
+          {/* Possible future links, like "Contact" */}
         </Link>
       </nav>
       {isSupabaseConnected && <AuthButton />}

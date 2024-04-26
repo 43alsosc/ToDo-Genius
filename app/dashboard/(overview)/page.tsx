@@ -1,13 +1,12 @@
 import { CollapsedSideNav } from "@/components/side-nav";
-import { Tabs } from "@/components/ui/tabs";
 import { DataTable } from "@/components/data-table/data-table";
 import { columns } from "@/components/data-table/columns";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import CookieBanner from "@/components/CookieBanner";
+import getData from "@/api/fetch/getDataTableData";
 import { Suspense } from "react";
 import DataTableSkeleton from "@/components/data-table/skeleton";
-import getData from "@/api/fetch/getDataTableData";
 
 export default async function page({}) {
   const supabase = createClient();

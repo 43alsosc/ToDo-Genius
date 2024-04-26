@@ -28,7 +28,7 @@ function handleExportClick(event: React.MouseEvent<HTMLButtonElement>) {
   exportToExcel("data.xlsx");
 }
 
-export default async function ExportButton() {
+export default function ExportButton() {
   return (
     <Button
       size="sm"
