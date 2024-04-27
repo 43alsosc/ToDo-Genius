@@ -1,4 +1,5 @@
 # <p align="center"> ToDo Genius, NextJS ToDo webapp with SupaBase </p>
+<img width="1346" alt="Skjermbilde 2024-04-27 kl  12 10 26" src="https://github.com/43alsosc/ToDo-Genius/assets/114300964/0125d0f0-bdab-427b-b70f-a18aaed99836">
 
 ## <p align="center"> Prosjektoversikt </p>
 
